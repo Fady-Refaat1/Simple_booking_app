@@ -18,7 +18,7 @@ export function flashMessages (state = [], action = {}) {
         console.log(foundIndex)
         if (foundIndex >= 0) {
             return [
-                ...state.filter((index) => {return index !== foundIndex})
+                ...state.filter((m,index) => {return index !== foundIndex})
             ];
         }
         return state;
