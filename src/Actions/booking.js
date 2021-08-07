@@ -20,7 +20,7 @@ export function handleAddBooking(info){
             dispatch(hideLoading())
             dispatch(addFlashMessage({
                 type: 'success',
-                text: 'You signed up successfully. Welcome!'
+                text:'The resource booked successfully !'
                 }))
         })
         .catch((e)=>{
