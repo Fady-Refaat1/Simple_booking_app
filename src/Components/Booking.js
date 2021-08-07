@@ -25,15 +25,22 @@ const Booking = (props) =>{
     const handleBooking = (event) =>{
         event.preventDefault();
         const resourceId = id
-        if(availableDateTo > dateTo && availableDateFrom <= dateFrom  && dateTo > dateFrom && bookedQuantity <= quantity){
-        props.handleAddBooking({dateFrom,dateTo,bookedQuantity,resourceId})
-        }
-        else{
-        props.addFlashMessage({
-                type: 'error',
-                text: 'fail'
-                })
-        }
+
+            if(!(availableDateTo > dateTo && availableDateFrom <= dateFrom )){
+                props.addFlashMessage({
+                    type: 'error',
+                    text: `sorry the resource not available in this date From ${dateFrom}--${dateTo}`
+                    })
+            }
+            else if (bookedQuantity > quantity){
+                props.addFlashMessage({
+                    type: 'error',
+                    text:quantity === 0 ?'sorry the resource is not available any more':`sorry the available resource quantity is only :  ${quantity}`
+                    })
+            }
+            else{
+                props.handleAddBooking({dateFrom,dateTo,bookedQuantity,resourceId})
+            }
     }
     
     if(resource === 'notFound'){
@@ -61,6 +68,7 @@ const Booking = (props) =>{
             </Form.Label>
             <DatePicker 
             selected={dateTo} 
+            minDate={dateFrom}
             showTimeSelect
             dateFormat="dd/MM/yyyy HH:mm"
             onChange={(date) => setDateTo(Date.parse(date))} />
