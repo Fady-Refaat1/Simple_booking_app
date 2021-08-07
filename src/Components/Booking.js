@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import FlashMessagesList from "./FlashMessageList";
 import { addFlashMessage} from "../Actions/flashMessage";
 import 'react-datepicker/dist/react-datepicker.css';
+import { formatDate } from "../utils/DATA";
 
 const Booking = (props) =>{
     const [dateFrom, setDateFrom] = useState(Date.now());
@@ -26,10 +27,10 @@ const Booking = (props) =>{
         event.preventDefault();
         const resourceId = id
 
-            if(!(availableDateTo > dateTo && availableDateFrom <= dateFrom )){
+            if(!(availableDateTo > dateTo && availableDateFrom <= dateFrom && dateTo > dateFrom)){
                 props.addFlashMessage({
                     type: 'error',
-                    text: `sorry the resource not available in this date From ${dateFrom}--${dateTo}`
+                    text: `sorry the resource not available in this date From ${formatDate(dateFrom)} : ${formatDate(dateTo)}`
                     })
             }
             else if (bookedQuantity > quantity){
@@ -59,7 +60,7 @@ const Booking = (props) =>{
             selected={dateFrom} 
             minDate={new Date()}
             showTimeSelect
-            dateFormat="dd/MM/yyyy HH:mm"
+            dateFormat="MM/dd/yyyy HH:mm"
             onChange={(date) => setDateFrom(Date.parse(date))} />
             </Form.Group>
             <Form.Group className="mb-3 w-75  mx-auto" controlId="formBasicEmail">
@@ -70,7 +71,7 @@ const Booking = (props) =>{
             selected={dateTo} 
             minDate={dateFrom}
             showTimeSelect
-            dateFormat="dd/MM/yyyy HH:mm"
+            dateFormat="MM/dd/yyyy HH:mm"
             onChange={(date) => setDateTo(Date.parse(date))} />
             </Form.Group>
             <Form.Group className="mb-3 w-75  mx-auto" controlId="formBasicEmail">

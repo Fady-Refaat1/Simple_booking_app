@@ -2,10 +2,11 @@ import { connect } from 'react-redux';
 import {Button,Row, Col, Card} from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types'
+import { formatDate } from '../utils/DATA';
 
 const ResourceCard = (props) =>{
     const { resource } = props
-    const {id,name,quantity} =resource
+    const {id,name,quantity,availableDateFrom,availableDateTo} =resource
 
     const toBookingPage = (event, id) => {
         event.preventDefault()
@@ -13,7 +14,7 @@ const ResourceCard = (props) =>{
         }
 
     return(
-        <Card key={resource.id} className='w-50  bg-light mx-auto rounded-3 border  shadow p-3 m-5  ' style={{color:'black' }}>
+        <Card key={resource.id} className='w-75  bg-light mx-auto rounded-3 border  shadow p-3 m-5  ' style={{color:'black' }}>
                 <Row>
                     <Col>
                     Resource ID : {id}
@@ -23,6 +24,17 @@ const ResourceCard = (props) =>{
                     </Col>
                     <Col>
                     Available quantity : {quantity}
+                    </Col>
+                    <Col>
+                    <Row>
+                    Available Date : 
+                    </Row>
+                    <Row>
+                    Date From : {formatDate(availableDateFrom)}  
+                    </Row>
+                    <Row>
+                    Date To : {formatDate(availableDateTo)}
+                    </Row>
                     </Col>
                     <Col>
                     <Button
