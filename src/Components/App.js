@@ -17,7 +17,7 @@ const App = (props) => {
   
   useEffect(()=>{
     handleIntilData()
-  }) // = componentDidMount
+  },[]) // = componentDidMount
 
   return (
     <Fragment >
