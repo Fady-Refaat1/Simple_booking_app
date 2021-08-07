@@ -23,6 +23,12 @@ let resources = {
     }
 let booking = []
 
+export const formatDate = (timestamp) => {
+    const date = new Date(timestamp)
+    const time = date.toLocaleTimeString('en-US')
+    return time.substr(0, 5) + time.slice(-2) + ' | ' + date.toLocaleDateString()
+    }
+
 function generateUID () {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
@@ -60,19 +66,3 @@ export function saveBooking (info) {
     }, 1000)
     })
 }
-
-  // function updateVeryNestedField(state, action) {
-        //     return {
-        //       ...state,
-        //       first: {
-        //         ...state.first,
-        //         second: {
-        //           ...state.first.second,
-        //           [action.someId]: {
-        //             ...state.first.second[action.someId],
-        //             fourth: action.someValue
-        //           }
-        //         }
-        //       }
-        //     }
-        //   }
