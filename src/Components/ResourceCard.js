@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 const ResourceCard = (props) =>{
     const { resource } = props
-    const {id,name} =resource
+    const {id,name,quantity} =resource
 
     const toBookingPage = (event, id) => {
         event.preventDefault()
@@ -20,6 +20,9 @@ const ResourceCard = (props) =>{
                     </Col>
                     <Col>
                     Resource Name : {name}
+                    </Col>
+                    <Col>
+                    Available quantity : {quantity}
                     </Col>
                     <Col>
                     <Button
